@@ -97,17 +97,31 @@ if(isset($_SESSION['mensaje'])){
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      /* cambio de idiomas de datatable */
+      "pageLength": 5,
+          language: {
+              "emptyTable": "No hay información",
+              "decimal": "",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+              "infoEmpty": "Mostrando 0 to 0 of 0 Usuarios",
+              "infoFiltered": "(Filtrado de _MAX_ total Usuarios)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ Usuarios",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscador:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                  "first": "Primero",
+                  "last": "Ultimo",
+                  "next": "Siguiente",
+                  "previous": "Anterior"
+              }
+             },
+      /* fin de idiomas */
+      "responsive": true, "lengthChange": true, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
   });
 </script>
