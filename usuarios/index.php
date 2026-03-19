@@ -4,20 +4,6 @@ include('../layout/sesion.php');
 include('../layout/parte1.php');
 include('../app/controllers/usuarios/listado_de_usuarios.php'); 
 
-if(isset($_SESSION['mensaje'])){
-  $respuesta = $_SESSION['mensaje']; ?>;
-  <script>
-  Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: '<?php echo $respuesta;?>',
-    showConfirmButton: false,
-    timer: 2000
-  })</script>
-  <?php
-  unset($_SESSION['mensaje']);
-}
-
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -74,7 +60,7 @@ if(isset($_SESSION['mensaje'])){
                       <center>
                         <div class="btn-group">
                         <a href="show.php?id=<?php echo $id_usuario; ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i>Ver</a>
-                        <button type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</button>
+                        <a href="update.php?id=<?php echo $id_usuario; ?>" type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</a>
                         <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Borrar</button>
                       </div>
                       </center>
@@ -103,6 +89,7 @@ if(isset($_SESSION['mensaje'])){
 </div>
 <!-- /.content-wrapper -->
 
+<?php include('../layout/mensaje.php'); ?>
 <?php include('../layout/parte2.php'); ?>
 
 <script>

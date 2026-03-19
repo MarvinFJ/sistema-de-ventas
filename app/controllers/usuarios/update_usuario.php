@@ -1,6 +1,5 @@
 <?php
 
-
 $id_usuario_get = $_GET['id'];
 
 $sql_usuarios = "SELECT * FROM tb_usuarios where id_usuario = '$id_usuario_get'";
