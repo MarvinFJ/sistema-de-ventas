@@ -58,16 +58,27 @@ if(isset($_SESSION['mensaje'])){
                   <th><center>Nro</center></th>
                   <th><center>Nombres</center></th>
                   <th><center>Email</center></th>
+                  <th><center>Acciones</center></th>
                 </tr>
                   </thead>
                   <tbody>
                   <?php
                   $contador = 0;
-                  foreach ($usuarios_datos as $usuarios_datos) { ?>
+                  foreach ($usuarios_datos as $usuarios_datos) { 
+                    $id_usuario = $usuarios_datos['id_usuario'];?>
                   <tr>
                     <td><center><?php echo $contador = $contador + 1;?></center></td>
                     <td><?php echo $usuarios_datos['nombres'];?></td>
-                    <td><?php echo $usuarios_datos['email'];?></td>                   
+                    <td><?php echo $usuarios_datos['email'];?></td>   
+                    <td>
+                      <center>
+                        <div class="btn-group">
+                        <a href="show.php?id=<?php echo $id_usuario; ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i>Ver</a>
+                        <button type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Borrar</button>
+                      </div>
+                      </center>
+                    </td>                
                   </tr>
                     <?php
                   }
@@ -121,7 +132,32 @@ if(isset($_SESSION['mensaje'])){
              },
       /* fin de idiomas */
       "responsive": true, "lengthChange": true, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      /* Ajuste de botones */
+                    buttons: [{
+                        extend: 'collection',
+                        text: 'Reportes',
+                        orientation: 'landscape',
+                        buttons: [{
+                            text: 'Copiar',
+                            extend: 'copy'
+                        }, {
+                            extend: 'pdf',
+                        }, {
+                            extend: 'csv',
+                        }, {
+                            extend: 'excel',
+                        }, {
+                            text: 'Imprimir',
+                            extend: 'print'
+                        }
+                        ]
+                    },
+                        {
+                            extend: 'colvis',
+                            text: 'Visol de columnas'
+                        }
+                    ],
+                    /*Fin de ajuste de botones*/
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
 </script>
