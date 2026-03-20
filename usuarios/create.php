@@ -40,19 +40,19 @@ include('../layout/parte1.php');
                   <form action="../app/controllers/usuarios/create.php" method="post">
                     <div class="formgroup">
                       <label for="">Nombres</label>
-                      <input type="text" name="nombres" class="form-control" placeholder="Escriba el nombre del nuevo usuario">
+                      <input type="text" name="nombres" class="form-control" placeholder="Escriba el nombre del nuevo usuario..." required>
                     </div>
                     <div class="formgroup">
                       <label for="">Email</label>
-                      <input type="email" name="email" class="form-control" placeholder="Escriba el email del nuevo usuario">
+                      <input type="email" name="email" class="form-control" placeholder="Escriba el email del nuevo usuario..." required>
                     </div>
                     <div class="formgroup">
                       <label for="">Password</label>
-                      <input type="text" name="password_user" class="form-control" placeholder="Escriba el Password del nuevo usuario">
+                      <input type="text" name="password_user" class="form-control" placeholder="Escriba el Password del nuevo usuario..." required>
                     </div>
                     <div class="formgroup">
                       <label for="">Verificar Password</label>
-                      <input type="text" name="password_repeat" class="form-control" placeholder="Verificar Password del nuevo usuario">
+                      <input type="text" name="password_repeat" class="form-control" placeholder="Verificar Password del nuevo usuario..." required>
                     </div>
                     <hr>
                     <div class="formgroup">
@@ -74,5 +74,5 @@ include('../layout/parte1.php');
   </div><!-- /.container-fluid -->
 </div>
 
-<?php include('../layout/mensajes.php');?>
+<?php include('../layout/mensajes.php'); ?>
 <?php include('../layout/parte2.php'); ?>

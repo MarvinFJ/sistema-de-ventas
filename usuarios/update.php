@@ -40,15 +40,15 @@ include('../app/controllers/usuarios/update_usuario.php');
             <div class="card-body" style="display: block;">
               <div class="row">
                 <div class="col-md-12">
-                    <form action="../app/controllers/usuarios/update.php" method="post">
-                        <input type="text" name="id_usuario" value="<?php echo $id_usuario_get;?>" hidden>
+                  <form action="../app/controllers/usuarios/update.php" method="post">
+                    <input type="text" name="id_usuario" value="<?php echo $id_usuario_get; ?>" hidden>
                     <div class="formgroup">
                       <label for="">Nombres</label>
-                      <input type="text" name="nombres" class="form-control" value = "<?php echo $nombres;?>" placeholder="Escriba el nombre del nuevo usuario">
+                      <input type="text" name="nombres" class="form-control" value="<?php echo $nombres; ?>" placeholder="Escriba el nombre del nuevo usuario..." required>
                     </div>
                     <div class="formgroup">
                       <label for="">Email</label>
-                      <input type="email" name="email" class="form-control" value = "<?php echo $email;?>" placeholder="Escriba el email del nuevo usuario">
+                      <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Escriba el email del nuevo usuario..." required>
                     </div>
                     <div class="formgroup">
                       <label for="">Password</label>
@@ -61,9 +61,9 @@ include('../app/controllers/usuarios/update_usuario.php');
                     <hr>
                     <div class="formgroup">
                       <a href="index.php" class="btn btn-secondary">Cancelar</a>
-                     <button type="submit" class="btn btn-success">Actualizar</button>
+                      <button type="submit" class="btn btn-success">Actualizar</button>
+                    </div>
                   </form>
-                  
                 </div>
               </div>
             </div>
@@ -78,6 +78,6 @@ include('../app/controllers/usuarios/update_usuario.php');
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <?php include('../layout/mensajes.php');?>
-  <?php include('../layout/parte2.php');?>
+</div>
+<?php include('../layout/mensajes.php'); ?>
+<?php include('../layout/parte2.php'); ?>
