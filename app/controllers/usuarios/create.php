@@ -8,7 +8,7 @@ $password_user = $_POST['password_user'];
 $password_repeat = $_POST['password_repeat'];
 
 if($password_user == $password_repeat){
-    $password_user = password_hash($password_user, algo: PASSWORD_DEFAULT);
+    $password_user = password_hash($password_user, PASSWORD_DEFAULT);
 
 // consulta SQL
 $sql = "INSERT INTO tb_usuarios (nombres, email, password_user, fyh_creacion) 
@@ -26,6 +26,7 @@ $sentencia->execute([
 ]);
  session_start();
     $_SESSION['mensaje'] = "Se registro Correctamente";
+    $_SESSION['icono'] = "success";
     header('Location:' .$URL.'/usuarios');
 }else{
     //echo "Error las contrasenas no son iguales";

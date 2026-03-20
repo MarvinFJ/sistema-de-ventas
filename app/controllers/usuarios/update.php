@@ -9,7 +9,7 @@ $password_repeat = $_POST['password_repeat'];
 $id_usuario = $_POST['id_usuario'];
 
 if($password_user == $password_repeat){
-    $password_user = password_hash($password_user, algo: PASSWORD_DEFAULT);
+    $password_user = password_hash($password_user, PASSWORD_DEFAULT);
 
 // consulta SQL
 $sql = ("UPDATE tb_usuarios 
@@ -32,7 +32,7 @@ $sentencia->execute([
 ]);
  session_start();
     $_SESSION['mensaje'] = "Se actualizo Correctamente";
-    $_SESSION['icono'] = 'Success';
+    $_SESSION['icono'] = "success";
     header('Location:' .$URL.'/usuarios');
 }else{
     //echo "Error las contrasenas no son iguales";
