@@ -25,7 +25,7 @@ include('../app/controllers/roles/listado_de_roles.php');
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <div class="card card-outline card-primary">
             <div class="card-header">
               <h3 class="card-title">Roles Registrados</h3>

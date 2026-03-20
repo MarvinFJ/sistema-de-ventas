@@ -4,6 +4,7 @@ include('../../config.php');
 
 $nombres = $_POST['nombres'];
 $email = $_POST['email'];
+$rol = $_POST['rol'];
 $password_user = $_POST['password_user'];
 $password_repeat = $_POST['password_repeat'];
 
@@ -11,8 +12,8 @@ if($password_user == $password_repeat){
     $password_user = password_hash($password_user, PASSWORD_DEFAULT);
 
 // consulta SQL
-$sql = "INSERT INTO tb_usuarios (nombres, email, password_user, fyh_creacion) 
-VALUES (:nombres, :email, :password_user, :fyh_creacion)";
+$sql = "INSERT INTO tb_usuarios (nombres, email, id_rol, password_user, fyh_creacion) 
+VALUES (:nombres, :email, :id_rol, :password_user, :fyh_creacion)";
 
 // preparar consulta
 $sentencia = $pdo->prepare($sql);
@@ -21,6 +22,7 @@ $sentencia = $pdo->prepare($sql);
 $sentencia->execute([
     ':nombres' => $nombres,
     ':email' => $email,
+    ':id_rol' => $rol,
     ':password_user' => $password_user,
     ':fyh_creacion' => $fechaHora
 ]);
