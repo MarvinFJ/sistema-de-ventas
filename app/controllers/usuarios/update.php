@@ -32,7 +32,7 @@ $sentencia->execute([
 ]);
  session_start();
     $_SESSION['mensaje'] = "Se actualizo Correctamente";
-    $_SESSION['icono'] = "Success";
+    $_SESSION['icono'] = 'Success';
     header('Location:' .$URL.'/usuarios');
 }else{
     //echo "Error las contrasenas no son iguales";

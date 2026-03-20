@@ -1,7 +1,7 @@
 <?php
 include('../app/config.php');
 include('../layout/sesion.php');
-include('../layout/parte1.php'); 
+include('../layout/parte1.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -17,16 +17,15 @@ include('../layout/parte1.php');
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-5">
 
-            <div class="card card-primary">
+          <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title" _msttexthash="109512" _msthash="201">Llene los datos con cuidado</h3>
+              <h3 class="card-title">Llene los datos con cuidado</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -38,7 +37,7 @@ include('../layout/parte1.php');
             <div class="card-body" style="display: block;">
               <div class="row">
                 <div class="col-md-12">
-                  <form action="../app/controllers//usuarios/create.php" method="post">
+                  <form action="../app/controllers/usuarios/create.php" method="post">
                     <div class="formgroup">
                       <label for="">Nombres</label>
                       <input type="text" name="nombres" class="form-control" placeholder="Escriba el nombre del nuevo usuario">
@@ -58,23 +57,22 @@ include('../layout/parte1.php');
                     <hr>
                     <div class="formgroup">
                       <a href="index.php" class="btn btn-secondary">Cancelar</a>
-                     <button type="submit" class="btn btn-primary">Guardar</button>
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
                   </form>
-                
-              </div>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
 
+    </div>
 
-    </div><!-- /.container-fluid -->
-  </div>
-  <!-- /.content -->
+
+  </div><!-- /.container-fluid -->
 </div>
-<!-- /.content-wrapper -->
 
+<?php include('../layout/mensajes.php');?>
 <?php include('../layout/parte2.php'); ?>

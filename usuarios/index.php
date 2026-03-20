@@ -89,8 +89,8 @@ include('../app/controllers/usuarios/listado_de_usuarios.php');
 </div>
 <!-- /.content-wrapper -->
 
-<?php include('../layout/mensaje.php'); ?>
-<?php include('../layout/parte2.php'); ?>
+<?php include('../layout/mensajes.php');?>
+<?php include('../layout/parte2.php');?>
 
 <script>
   $(function () {
