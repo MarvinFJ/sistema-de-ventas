@@ -7,6 +7,7 @@ $email = $_POST['email'];
 $password_user = $_POST['password_user'];
 $password_repeat = $_POST['password_repeat'];
 $id_usuario = $_POST['id_usuario'];
+$rol = $_POST['rol'];
 
 if($password_user == ""){
     if($password_user == $password_repeat){
@@ -16,6 +17,7 @@ if($password_user == ""){
 $sql = ("UPDATE tb_usuarios 
 SET nombres=:nombres,
 email=:email,
+id_rol=:id_rol,
 fyh_actualizacion=:fyh_actualizacion 
 WHERE id_usuario=:id_usuario");
 
@@ -26,6 +28,7 @@ $sentencia = $pdo->prepare($sql);
 $sentencia->execute([
     ':nombres' => $nombres,
     ':email' => $email,
+    ':id_rol' => $rol,
     ':fyh_actualizacion' => $fechaHora,
     ':id_usuario' => $id_usuario
 ]);
@@ -49,6 +52,7 @@ $sentencia->execute([
 $sql = ("UPDATE tb_usuarios 
 SET nombres=:nombres,
 email=:email,
+id_rol=:id_rol,
 password_user =:password_user,
 fyh_actualizacion=:fyh_actualizacion 
 WHERE id_usuario=:id_usuario");
@@ -60,6 +64,7 @@ $sentencia = $pdo->prepare($sql);
 $sentencia->execute([
     ':nombres' => $nombres,
     ':email' => $email,
+    ':id_rol' => $rol,
     ':password_user' => $password_user,
     ':fyh_actualizacion' => $fechaHora,
     ':id_usuario' => $id_usuario
