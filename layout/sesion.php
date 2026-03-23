@@ -3,12 +3,14 @@ session_start();
 if (isset($_SESSION['sesion_email'])) {
   //echo "Si existe sesion de" . $_SESSION['sesion_email'];
   $email_sesion = $_SESSION['sesion_email'];
-  $sql = "SELECT * FROM tb_usuarios WHERE email='$email_sesion'";
+  $sql = "SELECT us.id_usuario as id_usuario, us.nombres as nombres, us.email as email, rol.rol as rol 
+                 FROM tb_usuarios as us INNER JOIN tb_roles as rol ON us.id_rol = rol.id_rol WHERE email='$email_sesion'";
   $query = $pdo->prepare($sql);
   $query->execute();
   $usuarios = $query->fetchAll(fetch_style: PDO::FETCH_ASSOC);
   foreach ($usuarios as $usuario) {
     $nombres_sesion = $usuario['nombres'];
+     $rol_sesion = $usuario['rol'];
   }
 } else {
   echo "no existe sesion";
