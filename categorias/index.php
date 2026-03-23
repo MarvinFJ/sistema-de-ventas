@@ -2,7 +2,7 @@
 include('../app/config.php');
 include('../layout/sesion.php');
 include('../layout/parte1.php');
-include('../app/controllers/categorias/listado_de_categorias');
+include('../app/controllers/categorias/listado_de_categorias.php');
 
 ?>
 
@@ -181,7 +181,7 @@ include('../app/controllers/categorias/listado_de_categorias');
                     <div class="col-md-12">
                         <div class="form-froup">
                             <label for="">Nombre de la categoria</label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="nombre_categoria" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,6 @@ include('../app/controllers/categorias/listado_de_categorias');
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="btn_create">Guardar</button>
-                
             </div>
         </div>
         <!-- /.modal-content -->
@@ -199,8 +198,15 @@ include('../app/controllers/categorias/listado_de_categorias');
 <!-- /.modal- -->
 
 <script>
-    $('#btn_create').click(function(){
+    $('#btn_create').click(function (){
         //alert("Guardar");
-        
+        var nombre_categoria = $('#nombre_categoria').val();
+
+        var url = "../app/controllers/categorias/registro_de_categoria.php";
+        $.get(url,{nombre_categoria:nombre_categoria},function (datos){
+           $('#respuestas').html(datos);
+        });
+
     });
 </script>
+<div id="respuestas"></div> 
