@@ -2,6 +2,8 @@
 include('../app/config.php');
 include('../layout/sesion.php');
 include('../layout/parte1.php');
+include('../app/controllers/almacen/listado_de_productos.php');
+include('../app/controllers/categorias/listado_de_categorias.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -46,13 +48,41 @@ include('../layout/parte1.php');
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">Codigo:</label>
-                                                            <input type="text" class="form-control">
+                                                            <?php
+                                                            function ceros($numero)
+                                                            {
+                                                                $len = 0;
+                                                                $cantidad_ceros = 5;
+                                                                $aux = $numero;
+                                                                $pos = strlen($numero);
+                                                                $len = $cantidad_ceros - $pos;
+                                                                for ($i = 0; $i < $len; $i++) {
+                                                                    $aux = "0" . $aux;
+                                                                }
+                                                                return $aux;
+                                                            }
+                                                            $contador_de_id_productos = 1;
+                                                            foreach ($productos_datos as $productos_dato) { 
+                                                                $contador_de_id_productos = $contador_de_id_productos + 1;
+                                                            }
+                                                            ?>
+                                                            <input type="text" class="form-control" value="<?php echo "P-" . ceros($contador_de_id_productos) ?>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">Categoria:</label>
-                                                            <input type="text" class="form-control">
+                                                            <select name="" id="" class="form-control">
+                                                                <?php
+                                                                foreach($categorias_datos as $categorias_dato){ ?>
+                                                                    <option value="<?php echo $categorias_dato['id_categoria'];?>">
+                                                                        <?php echo $categorias_dato['nombre_categoria'];?>
+                                                                    </option>
+                                                                <?php
+                                                                }
+                                                                ?> 
+                                                            </select>
+                                                           
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -66,7 +96,7 @@ include('../layout/parte1.php');
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">Usuario</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" value="<?php echo $email_sesion;?>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
@@ -88,25 +118,25 @@ include('../layout/parte1.php');
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">stock minimo:</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="number" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">stock maximo:</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="number" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Precio compra:</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="number" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Precio venta:</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="number" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -120,7 +150,30 @@ include('../layout/parte1.php');
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">Imagen del Producto</label>
-                                                    <input type="file" class="form-control">
+                                                    <input type="file" class="form-control" id="file">
+                                                    <br>
+                                                    <output id="list"></output>
+                                                    <script>
+                                                        function archivo(evt) {
+                                                            var files = evt.target.files; // FileList object
+                                                            // Obtenemos la imagen del campo "file".
+                                                            for (var i = 0, f; f = files[i]; i++) {
+                                                                //Solo admitimos imágenes.
+                                                                if (!f.type.match('image.*')) {
+                                                                    continue;
+                                                                }
+                                                                var reader = new FileReader();
+                                                                reader.onload = (function (theFile) {
+                                                                    return function (e) {
+                                                                        // Insertamos la imagen
+                                                                        document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="',e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                    };
+                                                                })(f);
+                                                                reader.readAsDataURL(f);
+                                                            }
+                                                        }
+                                                        document.getElementById('file').addEventListener('change', archivo, false);
+                                                    </script>
                                                 </div>
                                             </div>
                                         </div>
