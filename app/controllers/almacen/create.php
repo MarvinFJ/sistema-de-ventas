@@ -13,7 +13,14 @@ $stock_maximo = $_POST['stock_maximo'];
 $precio_compra = $_POST['precio_compra'];
 $precio_venta = $_POST['precio_venta'];
 $fecha_ingreso = $_POST['fecha_ingreso'];
-$imagen = $_FILES['imagen']['name'];
+
+
+$imagen = $_POST['imagen'];
+$nombreDelArchivo = date('Y-m-d H:i:s');
+$carpeta = $_SERVER['DOCUMENT_ROOT'] . "/www.sistemadeventas.com/almacen/img_productos/";
+$filename = date('Y-m-d_H-i-s') . "__" . $_FILES['imagen']['name'];
+
+move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta . $filename);
 
 
 
@@ -35,7 +42,7 @@ if($sentencia->execute([
     ':precio_compra' => $precio_compra,
     ':precio_venta' => $precio_venta,
     ':fecha_ingreso' => $fecha_ingreso,
-    ':imagen' => $imagen,
+    ':imagen' => $filename,
     ':id_usuario' => $id_usuario,
     ':id_categoria' => $id_categoria,
     ':fyh_creacion' => $fechaHora

@@ -73,7 +73,7 @@ include('../app/controllers/categorias/listado_de_categorias.php');
                                                         <div class="form-group">
                                                             <label for="">Categoria:</label>
                                                             <div style="display: flex">
-                                                                <select name="id_categoria" id="" class="form-control">
+                                                                <select name="id_categoria" id="" class="form-control" required>
                                                                 <?php
                                                                 foreach($categorias_datos as $categorias_dato){ ?>
                                                                     <option value="<?php echo $categorias_dato['id_categoria'];?>">
@@ -92,7 +92,7 @@ include('../app/controllers/categorias/listado_de_categorias.php');
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">Nombre:</label>
-                                                            <input type="text" name="nombre" class="form-control">
+                                                            <input type="text" name="nombre" class="form-control" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,7 +117,7 @@ include('../app/controllers/categorias/listado_de_categorias.php');
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Stock:</label>
-                                                            <input type="number" name="stock" class="form-control">
+                                                            <input type="number" name="stock" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -135,19 +135,19 @@ include('../app/controllers/categorias/listado_de_categorias.php');
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Precio compra:</label>
-                                                            <input type="number" name="precio_compra" class="form-control">
+                                                            <input type="number" name="precio_compra" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Precio venta:</label>
-                                                            <input type="number" name="precio_venta"  class="form-control">
+                                                            <input type="number" name="precio_venta"  class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Fecha de Ingreso:</label>
-                                                            <input type="date" name="fecha_ingreso"  class="form-control">
+                                                            <input type="date" name="fecha_ingreso"  class="form-control" required>
                                                         </div>
                                                     </div>
                                                 </div>
