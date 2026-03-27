@@ -1,5 +1,13 @@
 <?php
-include('../../config.php');
+/**
+ * Created by PhpStorm.
+ * User: HILARIWEB
+ * Date: 29/1/2023
+ * Time: 22:50
+ */
+
+
+include ('../../config.php');
 
 
 $codigo = $_POST['codigo'];
@@ -15,51 +23,45 @@ $precio_venta = $_POST['precio_venta'];
 $fecha_ingreso = $_POST['fecha_ingreso'];
 
 
-$imagen = $_POST['imagen'];
-$nombreDelArchivo = date('Y-m-d H:i:s');
-$carpeta = $_SERVER['DOCUMENT_ROOT'] . "/www.sistemadeventas.com/almacen/img_productos/";
-$filename = date('Y-m-d_H-i-s') . "__" . $_FILES['imagen']['name'];
+$image = $_POST['image'];
 
-move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta . $filename);
+$nombreDelArchivo = date("Y-m-d-h-i-s");
+$filename = $nombreDelArchivo."__".$_FILES['image']['name'];
+$location = "../../../almacen/img_productos/".$filename;
+
+move_uploaded_file($_FILES['image']['tmp_name'],$location);
 
 
+$sentencia = $pdo->prepare("INSERT INTO tb_almacen
+       ( codigo, nombre, descripcion, stock, stock_minimo, stock_maximo, precio_compra, precio_venta, fecha_ingreso, imagen, id_usuario, id_categoria, fyh_creacion) 
+VALUES (:codigo,:nombre,:descripcion,:stock,:stock_minimo,:stock_maximo,:precio_compra,:precio_venta,:fecha_ingreso,:imagen,:id_usuario,:id_categoria,:fyh_creacion)");
 
-// consulta SQL
-$sql = "INSERT INTO tb_almacen (codigo, nombre, descripcion, stock, stock_minimo, stock_maximo, precio_compra, precio_venta, fecha_ingreso, imagen, id_usuario, id_categoria, fyh_creacion) 
-VALUES (:codigo, :nombre, :descripcion, :stock, :stock_minimo, :stock_maximo, :precio_compra, :precio_venta, :fecha_ingreso, :imagen, :id_usuario, :id_categoria,:fyh_creacion)";
+$sentencia->bindParam('codigo',$codigo);
+$sentencia->bindParam('nombre',$nombre);
+$sentencia->bindParam('descripcion',$descripcion);
+$sentencia->bindParam('stock',$stock);
+$sentencia->bindParam('stock_minimo',$stock_minimo);
+$sentencia->bindParam('stock_maximo',$stock_maximo);
+$sentencia->bindParam('precio_compra',$precio_compra);
+$sentencia->bindParam('precio_venta',$precio_venta);
+$sentencia->bindParam('fecha_ingreso',$fecha_ingreso);
+$sentencia->bindParam('imagen',$filename);
+$sentencia->bindParam('id_usuario',$id_usuario);
+$sentencia->bindParam('id_categoria',$id_categoria);
+$sentencia->bindParam('fyh_creacion',$fechaHora);
 
-// preparar consulta
-$sentencia = $pdo->prepare($sql);
-
-// ejecutar consulta
-if($sentencia->execute([
-     ':codigo' => $codigo,
-    ':nombre' => $nombre,
-    ':descripcion' => $descripcion,
-    ':stock' => $stock,
-    ':stock_minimo' => $stock_minimo,
-    ':stock_maximo' => $stock_maximo,
-    ':precio_compra' => $precio_compra,
-    ':precio_venta' => $precio_venta,
-    ':fecha_ingreso' => $fecha_ingreso,
-    ':imagen' => $filename,
-    ':id_usuario' => $id_usuario,
-    ':id_categoria' => $id_categoria,
-    ':fyh_creacion' => $fechaHora
-
-])){
+if($sentencia->execute()){
     session_start();
-    $_SESSION['mensaje'] = "Se registro el producto Correctamente";
+    $_SESSION['mensaje'] = "Se registro el producto de la manera correcta";
     $_SESSION['icono'] = "success";
-    header('Location:' .$URL.'/almacen');
-    exit();
+    header('Location: '.$URL.'/almacen/');
 }else{
     session_start();
-    $_SESSION['mensaje'] = "Error no se Registro en la BD";
-     $_SESSION['icono'] = "error";
-    header('Location:' .$URL.'/almacen/create.php');
-     exit();
+    $_SESSION['mensaje'] = "Error no se pudo registrar en la base de datos";
+    $_SESSION['icono'] = "error";
+    header('Location: '.$URL.'/almacen/create.php');
 }
+
 
 
 

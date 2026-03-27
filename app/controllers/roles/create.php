@@ -1,34 +1,35 @@
 <?php
-include('../../config.php');
+/**
+ * Created by PhpStorm.
+ * User: HILARIWEB
+ * Date: 18/1/2023
+ * Time: 15:39
+ */
 
+include ('../../config.php');
 
 $rol = $_POST['rol'];
 
+    $sentencia = $pdo->prepare("INSERT INTO tb_roles
+       ( rol, fyh_creacion) 
+VALUES (:rol,:fyh_creacion)");
 
-// consulta SQL
-$sql = "INSERT INTO tb_roles (rol, fyh_creacion) 
-VALUES (:rol, :fyh_creacion)";
+    $sentencia->bindParam('rol',$rol);
+    $sentencia->bindParam('fyh_creacion',$fechaHora);
+    if($sentencia->execute()){
+        session_start();
+        $_SESSION['mensaje'] = "Se registro el rol de la manera correcta";
+        $_SESSION['icono'] = "success";
+        header('Location: '.$URL.'/roles/');
+    }else{
+        session_start();
+        $_SESSION['mensaje'] = "Error no se pudo registrar en la base de datos";
+        $_SESSION['icono'] = "error";
+        header('Location: '.$URL.'/roles/create.php');
+    }
 
-// preparar consulta
-$sentencia = $pdo->prepare($sql);
 
-// ejecutar consulta
-if($sentencia->execute([
-     ':rol' => $rol,
-    ':fyh_creacion' => $fechaHora
-])){
-    session_start();
-    $_SESSION['mensaje'] = "Se registro el rol Correctamente";
-    $_SESSION['icono'] = "success";
-    header('Location:' .$URL.'/roles');
-    exit();
-}else{
-    session_start();
-    $_SESSION['mensaje'] = "Error no se Registro en la BD";
-     $_SESSION['icono'] = "error";
-    header('Location:' .$URL.'/roles/create.php');
-     exit();
-}
+
 
 
 
