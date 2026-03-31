@@ -253,6 +253,7 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                         $query_carrito->execute();
                                         $carrito_datos = $query_carrito->fetchAll(PDO::FETCH_ASSOC);
                                         foreach($carrito_datos as $carrito_dato){
+                                            $id_carrito = $carrito_dato['id_carrito'];
                                             $contador_de_carrito = $contador_de_carrito + 1; 
                                             $cantidad_total = $cantidad_total + $carrito_dato['cantidad'];   
                                             $precio_unitario_total = $precio_unitario_total + floatval($carrito_dato['precio_venta']);
@@ -276,11 +277,12 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                     </center>
                                                 </td>
                                                 <td>
-                                                    <form action="">
-                                                        <center>
+                                                    <center>
+                                                    <form action="../app//controllers//ventas/borrar_carrito.php" method="post">
+                                                       <input type="text" name="id_carrito" value="<?php echo $id_carrito?>" hidden>
                                                             <button type="submit" class="btn btn-danger" btn-sm><i class="fa fa-trash"></i> Borrar</button>
-                                                        </center>
                                                     </form>
+                                                    </center>
                                                 </td>
                                             </tr>
                                         <?php
