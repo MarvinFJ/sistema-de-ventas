@@ -120,22 +120,22 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                                     <script>
                                                                         $('#btn_selecionar<?php echo $id_producto; ?>').click(function() {
 
-                                                                            
-                                                                           var id_producto = "<?php echo $productos_dato['id_producto']; ?>";
-                                                                           $('#id_producto').val(id_producto);
-                                                                           var producto = "<?php echo $productos_dato['nombre']; ?>";
-                                                                           $('#producto').val(producto);
 
-                                                                           var descripcion = "<?php echo $productos_dato['descripcion']; ?>";
-                                                                           $('#descripcion').val(descripcion);
+                                                                            var id_producto = "<?php echo $productos_dato['id_producto']; ?>";
+                                                                            $('#id_producto').val(id_producto);
+                                                                            var producto = "<?php echo $productos_dato['nombre']; ?>";
+                                                                            $('#producto').val(producto);
 
-                                                                           var precio_venta = "<?php echo $productos_dato['precio_venta']; ?>";
-                                                                           $('#precio_venta').val(precio_venta);
-                                                                           $('#cantidad').focus();
+                                                                            var descripcion = "<?php echo $productos_dato['descripcion']; ?>";
+                                                                            $('#descripcion').val(descripcion);
 
-                                                                            
+                                                                            var precio_venta = "<?php echo $productos_dato['precio_venta']; ?>";
+                                                                            $('#precio_venta').val(precio_venta);
+                                                                            $('#cantidad').focus();
 
-                                                                            
+
+
+
                                                                             //$('#modal-buscar_producto').modal('toggle');
 
                                                                         });
@@ -189,19 +189,27 @@ include('../app/controllers/almacen/listado_de_productos.php');
 
                                                 </div>
                                                 <button style="float: right" id="btn_registrar_carrito" class="btn btn-primary">Guardar</button>
+                                                <div id="respuesta_carrito"></div>
                                                 <script>
-                                                    $('#btn_registrar_carrito').click(function (){
-                                                        var id_venta = '<?php echo $contador_de_ventas + 1;?>';
+                                                    $('#btn_registrar_carrito').click(function() {
+                                                        var nro_venta = '<?php echo $contador_de_ventas + 1; ?>';
                                                         var id_producto = $('#id_producto').val();
                                                         var cantidad = $('#cantidad').val();
-                                                        
-                                                        if(id_producto==""){
 
-                                                        alert("Llene los campos");
-                                                        }else if(cantidad==""){
-                                                        alert("Llene la cantidad del producto");
-                                                        }else{
-                                                            alert("Listo para el controlador");
+                                                        if (id_producto == "") {
+
+                                                            alert("Llene los campos");
+                                                        } else if (cantidad == "") {
+                                                            alert("Llene la cantidad del producto");
+                                                        } else {
+                                                            var url = "../app/controllers/ventas/registrar_carrito.php";
+                                                            $.get(url, {
+                                                                nro_venta:nro_venta,
+                                                                id_producto:id_producto,
+                                                                cantidad:cantidad
+                                                            }, function(datos) {
+                                                                $('#respuesta_carrito').html(datos);
+                                                            });
                                                         }
                                                     });
                                                 </script>
@@ -232,7 +240,7 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                         <tr>
                                             <th colspan="3" style="background-color: #e7e7e7; text-align: right;">Total</th>
                                             <th>
