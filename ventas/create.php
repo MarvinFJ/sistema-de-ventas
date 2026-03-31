@@ -121,6 +121,8 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                                         $('#btn_selecionar<?php echo $id_producto; ?>').click(function() {
 
                                                                             
+                                                                           var id_producto = "<?php echo $productos_dato['id_producto']; ?>";
+                                                                           $('#id_producto').val(id_producto);
                                                                            var producto = "<?php echo $productos_dato['nombre']; ?>";
                                                                            $('#producto').val(producto);
 
@@ -161,6 +163,7 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
+                                                            <input type="text" id="id_producto" hidden>
                                                             <label for="">Producto</label>
                                                             <input type="text" id="producto" class="form-control" disabled>
                                                         </div>
@@ -185,7 +188,23 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                     </div>
 
                                                 </div>
-                                                <button style="float: right" class="btn btn-primary">Guardar</button>
+                                                <button style="float: right" id="btn_registrar_carrito" class="btn btn-primary">Guardar</button>
+                                                <script>
+                                                    $('#btn_registrar_carrito').click(function (){
+                                                        var id_venta = '<?php echo $contador_de_ventas + 1;?>';
+                                                        var id_producto = $('#id_producto').val();
+                                                        var cantidad = $('#cantidad').val();
+                                                        
+                                                        if(id_producto==""){
+
+                                                        alert("Llene los campos");
+                                                        }else if(cantidad==""){
+                                                        alert("Llene la cantidad del producto");
+                                                        }else{
+                                                            alert("Listo para el controlador");
+                                                        }
+                                                    });
+                                                </script>
                                                 <br><br>
 
 
@@ -213,44 +232,7 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <center>1</center>
-                                            </td>
-                                            <td>Gaseosa</td>
-                                            <td>Coca Cola</td>
-                                            <td>
-                                                <center>2</center>
-                                            </td>
-                                            <td>
-                                                <center>5</center>
-                                            </td>
-                                            <td>
-                                                <center>10</center>
-                                            </td>
-                                            <td>
-                                                <center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <center>1</center>
-                                            </td>
-                                            <td>Gaseosa</td>
-                                            <td>Coca Cola</td>
-                                            <td>
-                                                <center>2</center>
-                                            </td>
-                                            <td>
-                                                <center>5</center>
-                                            </td>
-                                            <td>
-                                                <center>10</center>
-                                            </td>
-                                            <td>
-                                                <center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center>
-                                            </td>
-                                        </tr>
+                                        
                                         <tr>
                                             <th colspan="3" style="background-color: #e7e7e7; text-align: right;">Total</th>
                                             <th>
