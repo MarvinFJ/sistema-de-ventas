@@ -120,50 +120,21 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                                     <script>
                                                                         $('#btn_selecionar<?php echo $id_producto; ?>').click(function() {
 
+                                                                            
+                                                                           var producto = "<?php echo $productos_dato['nombre']; ?>";
+                                                                           $('#producto').val(producto);
 
-                                                                            var id_producto = "<?php echo $productos_dato['id_producto']; ?>";
-                                                                            $('#id_producto').val(id_producto);
+                                                                           var descripcion = "<?php echo $productos_dato['descripcion']; ?>";
+                                                                           $('#descripcion').val(descripcion);
 
-                                                                            var codigo = "<?php echo $productos_dato['codigo']; ?>";
-                                                                            $('#codigo').val(codigo);
+                                                                           var precio_venta = "<?php echo $productos_dato['precio_venta']; ?>";
+                                                                           $('#precio_venta').val(precio_venta);
+                                                                           $('#cantidad').focus();
 
-                                                                            var categoria = "<?php echo $productos_dato['categoria']; ?>";
-                                                                            $('#categoria').val(categoria);
+                                                                            
 
-                                                                            var nombre = "<?php echo $productos_dato['nombre']; ?>";
-                                                                            $('#nombre_producto').val(nombre);
-
-                                                                            var email = "<?php echo $productos_dato['email']; ?>";
-                                                                            $('#usuario_producto').val(email);
-
-                                                                            var descripcion = "<?php echo $productos_dato['descripcion']; ?>";
-                                                                            $('#descripcio_producto').val(descripcion);
-
-                                                                            var stock = "<?php echo $productos_dato['stock']; ?>";
-                                                                            $('#stock').val(stock);
-                                                                            $('#stock_actual').val(stock);
-
-                                                                            var stock_minimo = "<?php echo $productos_dato['stock_minimo']; ?>";
-                                                                            $('#stock_minimo').val(stock_minimo);
-
-                                                                            var stock_maximo = "<?php echo $productos_dato['stock_maximo']; ?>";
-                                                                            $('#stock_maximo').val(stock_maximo);
-
-                                                                            var precio_compra = "<?php echo $productos_dato['precio_compra']; ?>";
-                                                                            $('#precio_compra').val(precio_compra);
-
-                                                                            var precio_venta = "<?php echo $productos_dato['precio_venta']; ?>";
-                                                                            $('#precio_venta').val(precio_venta);
-
-                                                                            var fecha_ingreso = "<?php echo $productos_dato['fecha_ingreso']; ?>";
-                                                                            $('#fecha_ingreso').val(fecha_ingreso);
-
-                                                                            var ruta_img = "<?php echo $URL . '/almacen/img_productos/' . $productos_dato['imagen']; ?>";
-                                                                            $('#img_producto').attr({
-                                                                                src: ruta_img
-                                                                            });
-
-                                                                            $('#modal-buscar_producto').modal('toggle');
+                                                                            
+                                                                            //$('#modal-buscar_producto').modal('toggle');
 
                                                                         });
                                                                     </script>
@@ -187,6 +158,37 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                     </tbody>
                                                     </tfoot>
                                                 </table>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Producto</label>
+                                                            <input type="text" id="producto" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label for="">Descripcion</label>
+                                                            <input type="text" id="descripcion" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="">Cantidad</label>
+                                                            <input type="text" id="cantidad" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="">Precio Unitario</label>
+                                                            <input type="text" id="precio_venta" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <button style="float: right" class="btn btn-primary">Guardar</button>
+                                                <br><br>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +204,7 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                         <tr>
                                             <th style="background-color: #e7e7e7; text-align: center">Nro</th>
                                             <th style="background-color: #e7e7e7; text-align: center">Producto</th>
-                                            <th style="background-color: #e7e7e7; text-align: center">Detalle</th>
+                                            <th style="background-color: #e7e7e7; text-align: center">Descripcion</th>
                                             <th style="background-color: #e7e7e7; text-align: center">Cantidad</th>
                                             <th style="background-color: #e7e7e7; text-align: center">Precio Unitario</th>
                                             <th style="background-color: #e7e7e7; text-align: center">Precio Subtotal</th>
@@ -212,28 +214,54 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><center>1</center></td>
+                                            <td>
+                                                <center>1</center>
+                                            </td>
                                             <td>Gaseosa</td>
                                             <td>Coca Cola</td>
-                                            <td><center>2</center></td>
-                                            <td><center>5</center></td>
-                                            <td><center>10</center></td>
-                                            <td><center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center></td>
+                                            <td>
+                                                <center>2</center>
+                                            </td>
+                                            <td>
+                                                <center>5</center>
+                                            </td>
+                                            <td>
+                                                <center>10</center>
+                                            </td>
+                                            <td>
+                                                <center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center>
+                                            </td>
                                         </tr>
-                                         <tr>
-                                            <td><center>1</center></td>
+                                        <tr>
+                                            <td>
+                                                <center>1</center>
+                                            </td>
                                             <td>Gaseosa</td>
                                             <td>Coca Cola</td>
-                                            <td><center>2</center></td>
-                                            <td><center>5</center></td>
-                                            <td><center>10</center></td>
-                                             <td><center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center></td>
+                                            <td>
+                                                <center>2</center>
+                                            </td>
+                                            <td>
+                                                <center>5</center>
+                                            </td>
+                                            <td>
+                                                <center>10</center>
+                                            </td>
+                                            <td>
+                                                <center><a href="" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i>Borrar</a></center>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th colspan="3" style="background-color: #e7e7e7; text-align: right;">Total</th>
-                                            <th><center>4</center></th>
-                                            <th><center>10</center></th>
-                                            <th><center>20</center></th>
+                                            <th>
+                                                <center>4</center>
+                                            </th>
+                                            <th>
+                                                <center>10</center>
+                                            </th>
+                                            <th>
+                                                <center>20</center>
+                                            </th>
                                     </tbody>
                                 </table>
                             </div>
