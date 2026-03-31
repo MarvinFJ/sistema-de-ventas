@@ -204,9 +204,9 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                                         } else {
                                                             var url = "../app/controllers/ventas/registrar_carrito.php";
                                                             $.get(url, {
-                                                                nro_venta:nro_venta,
-                                                                id_producto:id_producto,
-                                                                cantidad:cantidad
+                                                                nro_venta: nro_venta,
+                                                                id_producto: id_producto,
+                                                                cantidad: cantidad
                                                             }, function(datos) {
                                                                 $('#respuesta_carrito').html(datos);
                                                             });
@@ -240,6 +240,38 @@ include('../app/controllers/almacen/listado_de_productos.php');
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                        $contador_de_carrito = 0;
+                                        $nro_venta = $contador_de_ventas + 1;
+                                        $sql_carrito = "SELECT *, pro.nombre as nombre_producto, pro.descripcion as descripcion, pro.precio_venta as precio_venta 
+                                        FROM tb_carrito AS carr INNER JOIN tb_almacen as pro ON carr.id_producto = pro.id_producto 
+                                        WHERE nro_venta = '$nro_venta'";
+                                        $query_carrito = $pdo->prepare($sql_carrito);
+                                        $query_carrito->execute();
+                                        $carrito_datos = $query_carrito->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach($carrito_datos as $carrito_dato){
+                                            $contador_de_carrito = $contador_de_carrito + 1; ?>
+
+                                            <tr>
+                                                <td><center><?php echo $contador_de_carrito;?></center></td>
+                                                <td><?php echo $carrito_dato['nombre_producto'];?></td>
+                                                <td><?php echo $carrito_dato['descripcion'];?></td>
+                                                <td><center><?php echo $carrito_dato['cantidad'];?></center></td>
+                                                <td><center><?php echo $carrito_dato['precio_venta'];?></center></td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        $cantidad = floatval($carrito_dato['cantidad']);
+                                                        $precio_venta = floatval($carrito_dato['precio_venta']);
+                                                        echo $subtotal = $cantidad * $precio_venta;
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php
+
+                                        }
+                                        ?>
 
                                         <tr>
                                             <th colspan="3" style="background-color: #e7e7e7; text-align: right;">Total</th>
