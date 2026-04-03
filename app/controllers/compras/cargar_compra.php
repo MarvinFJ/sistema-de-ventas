@@ -41,7 +41,7 @@ foreach ($compras_datos as $compras_dato){
     $precio_venta_producto = $compras_dato['precio_venta_producto'];
     $fecha_ingreso = $compras_dato['fecha_ingreso'];
     $imagen = $compras_dato['imagen'];
-    $nombre_proveedor_tabla = $compras_dato['nombre_proveedor'];
+    $nombre_proveedor = $compras_dato['nombre_proveedor'];
     $celular_proveedor = $compras_dato['celular_proveedor'];
     $telefono_proveedor = $compras_dato['telefono_proveedor'];
     $empresa_proveedor = $compras_dato['empresa_proveedor'];

@@ -1,13 +1,8 @@
 <?php
 include ('../app/config.php');
 include ('../layout/sesion.php');
-
 include ('../layout/parte1.php');
-
-
 include ('../app/controllers/roles/listado_de_roles.php');
-
-
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -30,7 +25,7 @@ include ('../app/controllers/roles/listado_de_roles.php');
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Roles registrado</h3>
@@ -40,6 +35,7 @@ include ('../app/controllers/roles/listado_de_roles.php');
                             </div>
 
                         </div>
+                    
 
                         <div class="card-body" style="display: block;">
                             <table id="example1" class="table table-bordered table-striped">
@@ -80,6 +76,7 @@ include ('../app/controllers/roles/listado_de_roles.php');
                                 </tfoot>
                             </table>
                         </div>
+                       
 
                     </div>
                 </div>
@@ -148,6 +145,4 @@ include ('../app/controllers/roles/listado_de_roles.php');
             ],
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
-</script>
-
 </script>

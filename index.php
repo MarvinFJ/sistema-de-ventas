@@ -18,7 +18,7 @@ include ('app/controllers/compras/listado_de_compras.php');
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Bienvenido al SISTEMA de VENTAS - <?php echo $rol_sesion; ?> </h1>
+                    <h1 class="m-0"><?php echo $nombres_sesion;?> </h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -30,11 +30,9 @@ include ('app/controllers/compras/listado_de_compras.php');
     <div class="content">
         <div class="container-fluid">
 
-            Contenido del sistema
             <br><br>
 
             <div class="row">
-
 
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
@@ -147,7 +145,7 @@ include ('app/controllers/compras/listado_de_compras.php');
                         </div>
                         <a href="<?php echo $URL;?>/proveedores">
                             <div class="icon">
-                                <i class="fas fa-car"></i>
+                                <i class="fas fa-id-badge"></i>
                             </div>
                         </a>
                         <a href="<?php echo $URL;?>/proveedores" class="small-box-footer">
@@ -171,6 +169,29 @@ include ('app/controllers/compras/listado_de_compras.php');
                         <a href="<?php echo $URL;?>/compras">
                             <div class="icon">
                                 <i class="fas fa-cart-plus"></i>
+                            </div>
+                        </a>
+                        <a href="<?php echo $URL;?>/compras" class="small-box-footer">
+                            Más detalle <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                  <div class="col-lg-3 col-6">
+                    <div class="small-box bg-pink">
+                        <div class="inner">
+                            <?php
+                            $contador_de_compras = 0;
+                            foreach ($compras_datos as $compras_dato){
+                                $contador_de_compras = $contador_de_compras + 1;
+                            }
+                            ?>
+                            <h3><?php echo $contador_de_compras;?></h3>
+                            <p>Calendario</p>
+                        </div>
+                        <a href="<?php echo $URL;?>/compras">
+                            <div class="icon">
+                                <i class="fas fa-calendar"></i>
                             </div>
                         </a>
                         <a href="<?php echo $URL;?>/compras" class="small-box-footer">
