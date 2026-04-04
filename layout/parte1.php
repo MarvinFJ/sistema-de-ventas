@@ -1,3 +1,8 @@
+<?php
+include(__DIR__ . '/../app/controllers/configuraciones/show.php');
+
+?>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -33,21 +38,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
 
     <div class="wrapper">
-
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
+            style="background-color: <?php echo $config['color_navbar'] ?? '#ffffff'; ?>">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">online</a>
+                    <a href="#" onclick="mostrarGuia()" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Ayuda
+                    </a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#modal-config">
+                        <i class="fas fa-cog"></i>
+                    </a>
                 </li>
             </ul>
+
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -60,12 +69,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </nav>
         <!-- /.navbar -->
 
+
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#1F2937;">
+        <aside class="main-sidebar elevation-4"
+            style="background-color: <?php echo $config['color_sidebar'] ?? '#343a40'; ?>">
             <!-- Brand Logo -->
             <a href="<?php echo $URL; ?>" class="brand-link">
-                <img src="<?php echo $URL; ?>../almacen//img_productos//logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">CHERRY BLOSSOM</span>
+                <img src="<?php echo $URL; ?>/almacen/logo/<?php echo $config['logo'] ?? 'logo.png'; ?>"
+                    onerror="this.src='<?php echo $URL; ?>/almacen/logo/logo.png'"
+                    class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light">
+                    <?php echo $config['nombre_empresa'] ?? 'SIS VENTAS'; ?>
+                </span>
             </a>
 
             <!-- Sidebar -->
@@ -73,7 +88,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?php echo $URL; ?>../almacen//img_productos///mar.jpeg" class="img-circle elevation-2" alt="User Image">
+                        <<img src="<?php echo $URL; ?>/almacen/img_productos/mar.jpeg" class="img-circle elevation-2" alt="User Image">
+                        
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $rol_sesion; ?></a>
@@ -243,8 +259,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
 
-
-
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/app/controllers/login/cerrar_sesion.php" class="nav-link" style="background-color: #ca0a0b">
                                 <i class="nav-icon fas fa-door-closed"></i>
@@ -259,3 +273,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.sidebar -->
         </aside>
+
+        <div class="modal fade" id="modal-config">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header bg-dark text-white">
+                        <h4 class="modal-title">⚙️ Configuración del Sistema</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <form action="<?php echo $URL; ?>/app/controllers/configuraciones/update.php" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label>Nombre de la Empresa</label>
+                                <input type="text" name="nombre_empresa" class="form-control" value="<?php echo $config['nombre_empresa'] ?? ''; ?>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Logo</label>
+                                <input type="file" name="logo" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Color Sidebar</label>
+                                <input type="color" name="color_sidebar" value="<?php echo $config['color_sidebar'] ?? '#343a40'; ?>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Color Navbar</label>
+                                <input type="color" name="color_navbar" value="<?php echo $config['color_navbar'] ?? '#ffffff'; ?>">
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>

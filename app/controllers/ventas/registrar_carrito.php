@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: HILARIWEB
- * Date: 15/2/2023
- * Time: 19:35
- */
 
 include ('../../config.php');
 
@@ -12,7 +6,6 @@ include ('../../config.php');
 $nro_venta = $_GET['nro_venta'];
 $id_producto = $_GET['id_producto'];
 $cantidad = $_GET['cantidad'];
-
 
 
 $sentencia = $pdo->prepare("INSERT INTO tb_carrito
@@ -40,9 +33,4 @@ if($sentencia->execute()){
     </script>
     <?php
 }
-
-
-
-
-
 

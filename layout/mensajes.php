@@ -13,6 +13,7 @@ if( (isset($_SESSION['mensaje'])) && (isset($_SESSION['icono'])) ){
             timer: 2500
         })
     </script>
+
     <?php
     unset($_SESSION['mensaje']);
     unset($_SESSION['icono']);

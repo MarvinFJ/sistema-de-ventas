@@ -310,6 +310,9 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                                             </th>
                                     </tbody>
                                 </table>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#modal-pago">
+                                    Finalizar Venta
+                                </button>
                             </div>
                         </div>
 
@@ -317,7 +320,6 @@ include('../app/controllers/clientes/listado_de_clientes.php');
 
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="col-md-12">
@@ -460,11 +462,6 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                 </div>
             </div>
 
-
-
-
-
-
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -472,10 +469,67 @@ include('../app/controllers/clientes/listado_de_clientes.php');
 </div>
 <!-- /.content-wrapper -->
 
+<div class="modal fade" id="modal-pago">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header bg-success">
+                <h4 class="modal-title">💳 Método de Pago</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form action="../app/controllers/ventas/guardar_venta.php" method="post">
+                <div class="modal-body">
+
+                    <input type="hidden" name="nro_venta" value="<?php echo $contador_de_ventas + 1; ?>">
+                    <input type="hidden" name="total" id="total_venta" value="<?php echo $precio_total; ?>">
+                    <input type="hidden" name="nombre_cliente" id="input_nombre_cliente">
+                    <input type="hidden" name="nit_ci_cliente" id="input_nit_cliente">
+
+                    <div class="form-group">
+                        <label>Método de Pago</label>
+                        <select name="metodo_pago" class="form-control">
+                            <option value="EFECTIVO">Efectivo</option>
+                            <option value="TARJETA">Tarjeta</option>
+                            <option value="TRANSFERENCIA">Transferencia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total a pagar</label>
+                        <input type="text" class="form-control" value="<?php echo $precio_total; ?>" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Monto recibido</label>
+                        <input type="number" id="monto_recibido" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cambio</label>
+                        <input type="text" id="cambio" class="form-control" readonly>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success">Guardar Venta</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
 <?php include('../layout/mensajes.php'); ?>
 <?php include('../layout/parte2.php'); ?>
 
-
+<script>
+$('#modal-pago').on('show.bs.modal', function () {
+    $('#input_nombre_cliente').val($('#nombre_cliente').val());
+    $('#input_nit_cliente').val($('#nit_ci_cliente').val());
+});
+</script>
 
 <script>
     $(function() {
