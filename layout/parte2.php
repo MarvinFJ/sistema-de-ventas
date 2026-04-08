@@ -18,36 +18,26 @@
 
 
 <!-- DataTables  & Plugins -->
- <script>
-$('#monto_recibido').keyup(function(){
-    var recibido = parseFloat($(this).val());
-    var total = parseFloat($('#total_venta').val());
 
-    if(!isNaN(recibido)){
-        var cambio = recibido - total;
-        $('#cambio').val(cambio.toFixed(2));
-    }
-});
-</script>
 <script>
-$('form').submit(function(e){
+    $('#form_venta').submit(function(e) {
 
-    var recibido = parseFloat($('#monto_recibido').val());
-    var total = parseFloat($('#total_venta').val());
+        var recibido = parseFloat($('#monto_recibido').val());
+        var total = parseFloat($('#total_venta').val());
 
-    if(isNaN(recibido)){
-        alert("Ingrese el monto recibido");
-        e.preventDefault();
-        return;
-    }
+        if (isNaN(recibido)) {
+            alert("Ingrese el monto recibido");
+            e.preventDefault();
+            return;
+        }
 
-    if(recibido < total){
-        alert("El monto es menor al total");
-        e.preventDefault();
-        return;
-    }
+        if (recibido < total) {
+            alert("El monto es menor al total");
+            e.preventDefault();
+            return;
+        }
 
-});
+    });
 </script>
 <script src="<?php echo $URL; ?>/public/templeates/AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo $URL; ?>/public/templeates/AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

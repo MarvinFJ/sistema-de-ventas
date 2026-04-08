@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: HILARIWEB
- * Date: 17/1/2023
- * Time: 13:00
- */
-define('SERVIDOR','localhost');
-define('USUARIO','root');
-define('PASSWORD','');
-define('BD','sistemadeventas');
+
+if (!defined('SERVIDOR')) {
+    define('SERVIDOR', 'localhost');
+    define('USUARIO', 'root');
+    define('PASSWORD', '');
+    define('BD', 'sistemadeventas');
+}
 
 $servidor = "mysql:dbname=".BD.";host=".SERVIDOR;
 

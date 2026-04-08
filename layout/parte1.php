@@ -32,6 +32,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- jQuery -->
     <script src="<?php echo $URL; ?>/public/templeates/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+    <style>
+        .dropdown-menu {
+            margin-right: -50px;
+            /* mueve hacia la izquierda */
+        }
+    </style>
 
 </head>
 
@@ -54,6 +60,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-toggle="modal" data-target="#modal-config">
                         <i class="fas fa-cog"></i>
                     </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" style="position: relative;">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-danger navbar-badge" id="contadorNotificaciones">0</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
+                        style="right: 0; left: auto;">
+
+                        <span class="dropdown-header" id="tituloNotificaciones">0 Notificaciones</span>
+
+                        <div class="dropdown-divider"></div>
+
+                        <div id="listaNotificaciones"></div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a href="<?php echo $URL; ?>/calendario/calendario.php"
+                            class="dropdown-item dropdown-footer">
+                            Ver calendario
+                        </a>
+                    </div>
                 </li>
             </ul>
 
@@ -88,8 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <<img src="<?php echo $URL; ?>/almacen/img_productos/mar.jpeg" class="img-circle elevation-2" alt="User Image">
-                        
+                        <img src="<?php echo $URL; ?>/almacen/img_productos/mar.jpeg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $rol_sesion; ?></a>
@@ -258,6 +287,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/calendario/calendario.php" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Calendar
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/app/controllers/login/cerrar_sesion.php" class="nav-link" style="background-color: #ca0a0b">
@@ -316,3 +354,72 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+
+                function cargarNotificaciones() {
+
+                    $.ajax({
+                        url: '<?php echo $URL; ?>/app/controllers/eventos/notificaciones.php',
+                        type: 'GET',
+                        success: function(respuesta) {
+
+                            var eventos = JSON.parse(respuesta);
+
+                            var html = '';
+                            var contador = 0;
+
+                            var hoy = new Date();
+
+                            eventos.forEach(function(evento) {
+
+                                var fechaEvento = new Date(evento.fecha_inicio);
+                                var diferencia = (fechaEvento - hoy) / (1000 * 60 * 60 * 24);
+
+                                var color = 'text-success';
+                                var icono = 'far fa-calendar';
+
+                                // 🔥 LÓGICA DE ALERTA
+                                if (diferencia <= 1) {
+                                    color = 'text-danger';
+                                    icono = 'fas fa-exclamation-circle';
+                                } else if (diferencia <= 3) {
+                                    color = 'text-warning';
+                                    icono = 'fas fa-exclamation-triangle';
+                                } else if (diferencia <= 7) {
+                                    color = 'text-info';
+                                    icono = 'fas fa-bell';
+                                }
+
+                                html += `
+                                  <a href="<?php echo $URL; ?>/calendario/calendario.php?fecha=${evento.fecha_inicio}&id=${evento.id}" class="dropdown-item">
+                                    <i class="${icono} ${color} mr-2"></i> 
+                                    ${evento.titulo}
+                                    <span class="float-right text-muted text-sm">${evento.fecha_inicio}</span>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                `;
+
+                                contador++;
+                            });
+
+                            if (contador === 0) {
+                                html = '<span class="dropdown-item text-center">Sin notificaciones</span>';
+                            }
+
+                            $('#listaNotificaciones').html(html);
+                            $('#contadorNotificaciones').text(contador);
+                            $('#tituloNotificaciones').text(contador + ' Notificaciones');
+
+                        }
+                    });
+                }
+
+                cargarNotificaciones();
+
+                // 🔄 refresca cada 30 segundos
+                setInterval(cargarNotificaciones, 30000);
+
+            });
+        </script>

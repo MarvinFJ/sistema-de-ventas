@@ -1,12 +1,18 @@
 <?php
-include('../app/config.php');
+include ('../app/config.php');
 include('../layout/sesion.php');
 
 include('../layout/parte1.php');
 include('../app/controllers/ventas/listado_de_ventas.php');
 include('../app/controllers/almacen/listado_de_productos.php');
 include('../app/controllers/clientes/listado_de_clientes.php');
-?>
+
+if(isset($_GET['success'])): ?>
+<script>
+    alert('Venta realizada correctamente');
+    window.history.replaceState(null, null, window.location.pathname);
+</script>
+<?php endif; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -352,6 +358,7 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+                                        
                                         <div class="modal-body">
                                             <div class="table table-responsive">
                                                 <table id="example2" class="table table-bordered table-striped table-sm">
@@ -391,6 +398,8 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                                                                     <center> <button id="btn_pasar_cliente<?php echo $id_cliente; ?>" class="btn btn-info">Seleccionar</button></center>
                                                                     <script>
                                                                         $('#btn_pasar_cliente<?php echo $id_cliente; ?>').click(function() {
+                                                                            var id_cliente = '<?php echo $clientes_dato['id_cliente']; ?>';
+                                                                            $('#id_cliente_hidden').val(id_cliente);
                                                                             var nombre_cliente = '<?php echo $clientes_dato['nombre_cliente']; ?>';
                                                                             $('#nombre_cliente').val(nombre_cliente);
                                                                             var nit_ci_cliente = '<?php echo $clientes_dato['nit_ci_cliente']; ?>';
@@ -478,13 +487,12 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <form action="../app/controllers/ventas/guardar_venta.php" method="post">
+            <form id="form_venta" action="../app/controllers/ventas/guardar_venta.php" method="post">
                 <div class="modal-body">
 
                     <input type="hidden" name="nro_venta" value="<?php echo $contador_de_ventas + 1; ?>">
                     <input type="hidden" name="total" id="total_venta" value="<?php echo $precio_total; ?>">
-                    <input type="hidden" name="nombre_cliente" id="input_nombre_cliente">
-                    <input type="hidden" name="nit_ci_cliente" id="input_nit_cliente">
+                    <input type="hidden" name="cliente" id="cliente_hidden">
 
                     <div class="form-group">
                         <label>Método de Pago</label>
@@ -502,7 +510,7 @@ include('../app/controllers/clientes/listado_de_clientes.php');
 
                     <div class="form-group">
                         <label>Monto recibido</label>
-                        <input type="number" id="monto_recibido" class="form-control">
+                        <input type="number" name="monto_recibido" id="monto_recibido" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -515,6 +523,7 @@ include('../app/controllers/clientes/listado_de_clientes.php');
                 <div class="modal-footer">
                     <button class="btn btn-success">Guardar Venta</button>
                 </div>
+                <input type="hidden" name="id_cliente" id="id_cliente_hidden">
             </form>
 
         </div>
@@ -524,10 +533,14 @@ include('../app/controllers/clientes/listado_de_clientes.php');
 <?php include('../layout/mensajes.php'); ?>
 <?php include('../layout/parte2.php'); ?>
 
+
 <script>
-$('#modal-pago').on('show.bs.modal', function () {
-    $('#input_nombre_cliente').val($('#nombre_cliente').val());
-    $('#input_nit_cliente').val($('#nit_ci_cliente').val());
+$('#monto_recibido').on('input', function() {
+    var recibido = parseFloat($(this).val()) || 0;
+    var total = parseFloat($('#total_venta').val()) || 0;
+    var cambio = recibido - total;
+
+    $('#cambio').val(cambio.toFixed(2));
 });
 </script>
 
