@@ -63,13 +63,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#" style="position: relative;">
+                    <a class="nav-link" data-toggle="dropdown" href="#" onclick="cargarNotificaciones()">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-danger navbar-badge" id="contadorNotificaciones">0</span>
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
-                        style="right: 0; left: auto;">
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right shadow-lg" style="border-radius:10px;">
+
 
                         <span class="dropdown-header" id="tituloNotificaciones">0 Notificaciones</span>
 
@@ -79,9 +79,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <div class="dropdown-divider"></div>
 
-                        <a href="<?php echo $URL; ?>/calendario/calendario.php"
-                            class="dropdown-item dropdown-footer">
-                            Ver calendario
+                        <a href="<?php echo $URL; ?>/calendario/calendario.php?crear=1" class="dropdown-item text-center text-primary">
+                            <i class="fas fa-plus-circle"></i> Crear evento
                         </a>
                     </div>
                 </li>
@@ -393,11 +392,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }
 
                                 html += `
-                                  <a href="<?php echo $URL; ?>/calendario/calendario.php?fecha=${evento.fecha_inicio}&id=${evento.id}" class="dropdown-item">
-                                    <i class="${icono} ${color} mr-2"></i> 
-                                    ${evento.titulo}
-                                    <span class="float-right text-muted text-sm">${evento.fecha_inicio}</span>
-                                    </a>
+                                    <a href="<?php echo $URL; ?>/calendario/calendario.php?fecha=${evento.fecha_inicio}&id=${evento.id}" class="dropdown-item d-flex align-items-start">
+
+                                    <div class="mr-3">
+                                        <i class="${icono} ${color}" style="font-size:20px;"></i>
+                                    </div>
+
+                                    <div style="flex:1;">
+                                     <div style="font-weight:bold;">${evento.titulo}</div>
+                                     <small class="text-muted">${evento.fecha_inicio}</small>
+                                     </div>
+
+                                        </a>
                                     <div class="dropdown-divider"></div>
                                 `;
 
@@ -415,11 +421,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         }
                     });
                 }
-
+                //CARGA INICIAL
                 cargarNotificaciones();
 
                 // 🔄 refresca cada 30 segundos
                 setInterval(cargarNotificaciones, 30000);
+
+                //Dropdown siempre se actualize campanita
+                $('.nav-item.dropdown').on('show.bs.dropdown', function() {
+                    cargarNotificaciones();
+                });
 
             });
         </script>
