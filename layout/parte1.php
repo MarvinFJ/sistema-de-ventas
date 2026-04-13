@@ -33,9 +33,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <script src="<?php echo $URL; ?>/public/templeates/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
     <style>
-        .dropdown-menu {
-            margin-right: -50px;
-            /* mueve hacia la izquierda */
+        .navbar-nav .dropdown-menu {
+            transform: translateX(+90px);
+            /* mueve un poco a la izquierda */
         }
     </style>
 

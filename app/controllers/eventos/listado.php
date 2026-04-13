@@ -17,10 +17,11 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
         'backgroundColor' => $row['color'],
         'borderColor' => $row['color'],
 
-        // 👇 ESTO ES LO QUE TE FALTABA
         'cliente' => $row['cliente'],
         'producto' => $row['producto'],
         'cantidad' => $row['cantidad'],
+        'precio' => $row['precio'], // 🔥 IMPORTANTE
+        'producto_id' => $row['producto_id'],
         'descripcion' => $row['descripcion']
     ];
 }

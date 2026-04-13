@@ -1,3 +1,4 @@
+
 <?php
 include ('../app/config.php');
 include('../layout/sesion.php');
@@ -6,6 +7,13 @@ include('../layout/parte1.php');
 include('../app/controllers/ventas/listado_de_ventas.php');
 include('../app/controllers/almacen/listado_de_productos.php');
 include('../app/controllers/clientes/listado_de_clientes.php');
+
+//RECIBIR LOS DATOS 
+$cliente = $_GET['cliente'] ?? '';
+$producto = $_GET['producto'] ?? '';
+$cantidad = $_GET['cantidad'] ?? '';
+$descripcion = $_GET['descripcion'] ?? '';
+
 
 if(isset($_GET['success'])): ?>
 <script>
@@ -442,7 +450,7 @@ if(isset($_GET['success'])): ?>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Nombre del Cliente</label>
-                                        <input type="text" class="form-control" id="nombre_cliente">
+                                        <input type="text" class="form-control" id="nombre_cliente" value="<?php echo $cliente; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -535,6 +543,23 @@ if(isset($_GET['success'])): ?>
 
 
 <script>
+
+//LLENAR PRODUCTOS AUTOMATICAMENTE
+$(document).ready(function() {
+
+  var producto = "<?php echo $producto; ?>";
+  var cantidad = "<?php echo $cantidad; ?>";
+  var descripcion = "<?php echo $descripcion; ?>";
+
+  if (producto !== "") {
+    $('#producto').val(producto);
+    $('#descripcion').val(descripcion);
+    $('#cantidad').val(cantidad);
+  }
+
+});
+
+
 $('#monto_recibido').on('input', function() {
     var recibido = parseFloat($(this).val()) || 0;
     var total = parseFloat($('#total_venta').val()) || 0;

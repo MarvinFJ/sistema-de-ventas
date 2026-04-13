@@ -291,7 +291,6 @@ include('../app/controllers/proveedores/listado_de_proveedores.php');
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                     <button type="button" class="btn btn-danger" id="btn_delete<?php echo $id_proveedor; ?>">Eliminar</button>
-                                                                    <a href="delete.php?id_proveedor=<?php echo $id_proveedor; ?>" class="btn btn-danger">Eliminar</a>
                                                                 </div>
                                                                 <div id="respuesta_delete<?php echo $id_proveedor; ?>"></div>
                                                             </div>
